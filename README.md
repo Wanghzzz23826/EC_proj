@@ -1,44 +1,57 @@
-
 # EC_proj
 
-This repository contains the BrainPy-based implementation and running scripts for the V1 / VCD-related experiments.
+本仓库包含基于 BrainPy 的 V1 / VCD 相关实验代码与运行脚本。
 
-## Main Script
+## 主要运行脚本
 
-The main running script is:
+当前项目的主要运行脚本是：
 
+```bash
 run_vcd_4rec.py
+```
 
-This script is the primary entry point for running the Temporal-LGN + 4-receptor-background VCD experiment.
+该脚本是运行 Temporal-LGN + 4-receptor-background VCD 实验的主要入口。
 
-Environment Setup
+## Conda 环境配置
 
-The conda environment can be created from the provided environment.yml file.
+本项目提供了 `environment.yml` 文件，可以用于创建 conda 环境。
 
-Create the environment:
+创建环境：
 
+```bash
 conda env create -f environment.yml
+```
 
-Activate the environment:
+激活环境：
 
+```bash
 conda activate <env_name>
+```
 
-The environment name can be found in the first line of environment.yml, for example:
+其中 `<env_name>` 可以在 `environment.yml` 文件的第一行查看，例如：
 
+```yaml
 name: your_env_name
+```
 
-If you want to specify a new environment name manually, you can use:
+如果希望手动指定环境名，也可以使用：
 
+```bash
 conda env create -f environment.yml -n ec_proj
 conda activate ec_proj
-Data Preparation
+```
 
-The required data directory should be placed under:
+## 数据准备
 
+项目所需的数据文件需要放在以下路径：
+
+```bash
 ./data/GLIF_V1_network
+```
 
-The expected project structure is:
+推荐的项目目录结构如下：
 
+```text
 EC_proj/
 ├── run_vcd_4rec.py
 ├── environment.yml
@@ -47,60 +60,87 @@ EC_proj/
 ├── tensorflow_impl/
 └── data/
     └── GLIF_V1_network/
+```
 
-Note: The dataset is usually large and is not included in this repository. Please manually place the required V1 / GLIF network data under:
+由于数据文件通常较大，本仓库不包含完整数据集。请手动将所需的 V1 / GLIF network 数据放到：
 
+```bash
 ./data/GLIF_V1_network
-Required Path Modifications
+```
 
-Before running the project, make sure the data paths are correctly set.
+## 运行前需要修改的数据路径
 
-1. Modify brainpy_impl/load_sparse.py
+在运行项目之前，需要确认代码中的数据路径已经正确设置。
 
-In:
+### 1. 修改 `brainpy_impl/load_sparse.py`
 
+在以下文件中：
+
+```bash
 brainpy_impl/load_sparse.py
+```
 
-Make sure both h5path and path point to:
+需要将其中的 `h5path` 和 `path` 都改为：
 
+```python
 "./data/GLIF_V1_network"
+```
 
-For example:
+例如：
 
+```python
 h5path = "./data/GLIF_V1_network"
 path = "./data/GLIF_V1_network"
-2. Modify the data path in run_vcd_4rec.py
+```
 
-In:
+### 2. 修改 `run_vcd_4rec.py` 中的数据路径
 
+在以下文件中：
+
+```bash
 run_vcd_4rec.py
+```
 
-Make sure the data directory is also set to:
+也需要将数据路径改为：
 
+```python
 "./data/GLIF_V1_network"
+```
 
-For example, if the script contains a default data path such as:
+例如，如果脚本中包含类似：
 
+```python
 DEFAULT_DATA_DIR = ...
+```
 
-or a config field such as:
+或者配置项中包含：
 
+```python
 "data_dir": ...
+```
 
-change it to:
+请将其改为：
 
+```python
 "./data/GLIF_V1_network"
-Running the Main Script
+```
 
-After setting up the environment and preparing the data, run:
+## 运行方式
 
+完成环境配置和数据路径修改后，可以运行：
+
+```bash
 python run_vcd_4rec.py
+```
 
-If the script supports command-line arguments, you can further customize the run according to the configuration options inside run_vcd_4rec.py.
+如果 `run_vcd_4rec.py` 中提供了额外的配置项或命令行参数，可以根据实验需求进一步修改配置。
 
-Notes
-run_vcd_4rec.py is the main script for running the current experiment.
-environment.yml is used to recreate the conda environment.
-The data path should consistently point to:
+## 注意事项
+
+- `run_vcd_4rec.py` 是当前项目的主要运行脚本。
+- `environment.yml` 用于通过 conda 复现运行环境。
+- 数据目录需要统一设置为：
+
+```bash
 ./data/GLIF_V1_network
-Large files such as datasets, cache files, logs, and output folders should not be committed to GitHub.
+```
