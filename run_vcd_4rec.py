@@ -499,9 +499,9 @@ def main():
             # temporal LGN input setting
             "input_mode": "current",
             "schedule_mode": "seperate",
-            "im_slice": 50,
-            "gray_delay": 30,
-            "readout_period": 50,
+            "im_slice": 80,
+            "gray_delay": 50,
+            "readout_period": 100,
             "default_current": 0.0,
             "default_current_to_receptor": False,
             "default_input_to_receptor": True,
@@ -516,7 +516,7 @@ def main():
             "lgn_cache_kind": "input",
             "lgn_cache_num_phases": 8,
             "lgn_cache_phase_values": None,
-            "lgn_intensity": 2.0,
+            "lgn_intensity": 1.8,
             "cache_in_memory": False,
             "use_projected_current_cache_train": False,
             "projected_cache_dir": str(PROJECT_DIR / ".cache" / "pair_match_projected_current_4rec"),
@@ -568,7 +568,7 @@ def main():
             "orientation_step": 0.1,
             "orientation_spatial_freq": 0.1,
             "orientation_contrast": 1.0,
-        },  ### es_sp_rate_penalty 0.02,"k_rec_ee": 0.8, wrong_logit_penalty 0.1 k_b=0.6 k_h=1.5 , wrong_logit_penalty=0.2（上升）
+        },  
         cli_conf,
     )
 
